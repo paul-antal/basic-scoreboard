@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <script src="app.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+
+        input, button, body {
+            font-size: 5vw;
+        }
+
+        .btn {
+            padding: 2px;
+            margin: 5px;
+            border: 1px solid black;
+            background: #eee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .scoreContainer {
+            display: flex;
+            width: 100%;
+            max-height: 70%;
+            overflow-y: scroll;
+        }
+        
+        .boardControls{
+            display: flex;
+        }
+
+        .playerBox {
+            padding: 20px;
+            flex: 1 1;
+        }
+
+        .playerBox+.playerBox {
+            border-left: 1px solid lightblue;
+        }
+
+        .playerInput {
+            width: 50%;
+        }
+
+        .playerTotal {
+            border-bottom: 1px solid lightblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>start();</script>
+</body>
+
+</html>
