@@ -47,26 +47,36 @@ class HtmlScoreBoardCreator {
         let playerInput = createElement({ type: 'input', parent: container })
         playerInput.placeholder = 'Player name'
         playerInput.focus();
-        let addButton = createElement({ type: 'div', parent: container, classList: ['btn'], innerText: 'ADD' });
-        addButton.tabIndex = 0;
-        addButton.onclick = () => {
-            let playerName = playerInput.value;
-            this.players.push(playerName);
-            this.draw();
-        }
+        createElement({
+            type: 'div',
+            parent: container,
+            classList: ['btn'],
+            innerText: 'ADD',
+            isButton: true,
+            onclick: () => {
+                let playerName = playerInput.value;
+                this.players.push(playerName);
+                this.draw();
+            }
+        });
 
         for (let playerName of this.players) {
             createElement({ type: 'div', parent: container, innerText: playerName })
         }
-        let doneButton = createElement({ type: 'div', parent: container, classList: ['btn'], innerText: 'DONE' });
-        doneButton.tabIndex = 0;
-        doneButton.onclick = () => this.createBoard();
+        createElement({
+            type: 'div',
+            parent: container,
+            classList: ['btn'],
+            innerText: 'DONE',
+            isButton: true,
+            onclick: () => this.createBoard()
+        });
     }
 
     createBoard() {
         let renderer = new ScoreBoardHtmlRenderer();
         let scoreBoard = new ScoreBoard(renderer);
-        for(let player of this.players){
+        for (let player of this.players) {
             scoreBoard.addPlayer(player);
         }
         scoreBoard.draw();
@@ -131,13 +141,25 @@ class ScoreBoardHtmlRenderer {
     }
 
     addRootControls(container, scoreBoard) {
-        let closeScoreboard = createElement({ type: 'div', parent: container, classList: ['btn', 'resetScores'], innerText: 'Close Scores' });
-        closeScoreboard.onclick = () => {
-            StateStore.removeValue();
-            location.reload();
-        };
-        let resetScores = createElement({ type: 'div', parent: container, classList: ['btn', 'resetScores'], innerText: 'Reset Scores' });
-        resetScores.onclick = () => scoreBoard.resetScores();
+        let closeScoreboard = createElement({
+            type: 'div',
+            parent: container,
+            classList: ['btn', 'resetScores'],
+            innerText: 'Close Scores',
+            isButton: true,
+            onclick: () => {
+                StateStore.removeValue();
+                location.reload();
+            }
+        });
+        createElement({
+            type: 'div',
+            parent: container,
+            classList: ['btn', 'resetScores'],
+            innerText: 'Reset Scores',
+            isButton: true,
+            onclick: () => scoreBoard.resetScores()
+        });
     }
 
     addPlayerBox(scoreBoard, container, playerIndex) {
@@ -158,9 +180,14 @@ class ScoreBoardHtmlRenderer {
     addControls(container, scoreBoard) {
         let controls = createElement({ type: 'div', parent: container, classList: ['playerBox', 'controls'] })
         createElement({ type: 'div', parent: controls, classList: ['playerName'], innerText: '.' });
-        let submitButton = createElement({ type: 'div', parent: controls, classList: ['btn', 'playerName'], innerText: 'SUBMIT' });
-        submitButton.tabIndex = 0;
-        submitButton.onclick = () => this.submitScores(scoreBoard);
+        let submitButton = createElement({
+            type: 'div',
+            parent: controls,
+            classList: ['btn', 'playerInput'],
+            innerText: 'SUBMIT',
+            isButton: true,
+            onclick: () => this.submitScores(scoreBoard)
+        });
         createElement({ type: 'div', parent: controls, classList: ['playerTotal'], innerText: 'TOTAL' });
         for (let i = scoreBoard.gamesPlayed; i > 0; i--) {
             createElement({ type: 'div', parent: controls, classList: ['playerScore'], innerText: `${i}.` });
@@ -177,7 +204,7 @@ class ScoreBoardHtmlRenderer {
     }
 }
 
-function createElement({ type, classList, parent, innerText }) {
+function createElement({ type, classList, parent, innerText, isButton, onclick }) {
     let element = document.createElement(type);
     if (classList) {
         for (let className of classList) {
@@ -189,6 +216,17 @@ function createElement({ type, classList, parent, innerText }) {
     }
     if (innerText) {
         element.innerText = innerText;
+    }
+
+    element.onclick = onclick;
+
+    if (isButton) {
+        element.tabIndex = 0;
+        element.addEventListener("keydown", (e) => {
+            if (e.keyCode === 13) {
+                element.onclick();
+            }
+        })
     }
     return element;
 }
