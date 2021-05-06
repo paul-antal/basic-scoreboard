@@ -144,7 +144,7 @@ class ScoreBoardHtmlRenderer {
             type: 'div',
             parent: container,
             classList: ['btn', 'resetScores'],
-            innerText: 'Close Scores',
+            innerText: 'Create new board',
             isButton: true,
             onclick: () => {
                 StateStore.removeValue();
