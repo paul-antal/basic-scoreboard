@@ -167,8 +167,8 @@ class ScoreBoardHtmlRenderer {
         createElement({ type: 'div', parent: playerBox, classList: ['playerName'], innerText: player.name });
         let scoreInput = createElement({ type: 'input', parent: playerBox, classList: ['playerInput'] });
         scoreInput.type = 'number';
+        scoreInput.placeholder = '0';
         scoreInput.dataset.playerIndex = playerIndex;
-        scoreInput.value = 0;
         let total = player.scores.reduce((sum, val) => sum + val, 0);
         createElement({ type: 'div', parent: playerBox, classList: ['playerTotal'], innerText: total + '' })
         for (let score of player.scores.reverse()) {
