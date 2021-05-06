@@ -24,7 +24,6 @@ class StateStore {
 }
 
 function renderScoreBoardCreator() {
-    StateStore.setValue({ players: [], banana: 10 })
     let creatorRenderer = new HtmlScoreBoardCreator();
     creatorRenderer.draw();
 }
