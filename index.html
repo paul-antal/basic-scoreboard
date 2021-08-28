@@ -11,11 +11,12 @@
             font-weight: bold;
             font-size: 50px;
         }
-        h2{
+
+        h2 {
             text-align: center;
         }
 
-        input{
+        input {
             font-size: 1em;
         }
 
@@ -28,10 +29,10 @@
             text-align: center;
             cursor: pointer;
             user-select: none;
-            min-width:150px;
+            min-width: 150px;
         }
 
-        #container{
+        #container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,10 +43,10 @@
             width: 100%;
             overflow-y: auto;
         }
-        
-        .boardControls{
+
+        .boardControls {
             display: flex;
-            margin-bottom:20px;
+            margin-bottom: 20px;
         }
 
         .playerBox {
@@ -60,15 +61,36 @@
         .playerInput {
             width: 100%;
             margin: 15px 0;
+            text-align: center;
         }
 
-        .btn.playerInput{
+        .btn.playerInput {
             padding: 0;
         }
 
 
         .playerTotal {
             border-bottom: 1px solid lightblue;
+            text-align: center;
+        }
+
+        .playerScore {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .currentScore,
+        .currentTotal {
+            display: inline-block;
+        }
+
+        .currentTotal, .playerTotal{
+            color: lightcoral;
         }
     </style>
 </head>

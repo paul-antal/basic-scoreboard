@@ -171,8 +171,14 @@ class ScoreBoardHtmlRenderer {
         scoreInput.dataset.playerIndex = playerIndex;
         let total = player.scores.reduce((sum, val) => sum + val, 0);
         createElement({ type: 'div', parent: playerBox, classList: ['playerTotal'], innerText: total + '' })
+
+        var scoreContainer = createElement({ type: 'div', parent: playerBox, classList: ['playerScore']});
+        createElement({type: 'div', parent: scoreContainer, classList: ['currentScore'], innerText: "SCORE"});
+        createElement({type: 'div', parent: scoreContainer, classList: ['currentTotal'], innerText: "TOTAL"});
         for (let score of player.scores.slice().reverse()) {
-            createElement({ type: 'div', parent: playerBox, classList: ['playerScore'], innerText: 'C:' + score + ' T:' +  total});
+            var scoreContainer = createElement({ type: 'div', parent: playerBox, classList: ['playerScore']});
+            createElement({type: 'div', parent: scoreContainer, classList: ['currentScore'], innerText: '' + score});
+            createElement({type: 'div', parent: scoreContainer, classList: ['currentTotal'], innerText: '' + total});
             total -= score;
         }
     }
@@ -188,9 +194,10 @@ class ScoreBoardHtmlRenderer {
             isButton: true,
             onclick: () => this.submitScores(scoreBoard)
         });
-        createElement({ type: 'div', parent: controls, classList: ['playerTotal'], innerText: 'TOTAL' });
+        createElement({ type: 'div', parent: controls, classList: ['playerTotal'], innerText: 'GAME TOTAL' });
+        createElement({ type: 'div', parent: controls, classList: ['playerScore', 'center'], innerText: `ROUNDS` });
         for (let i = scoreBoard.gamesPlayed; i > 0; i--) {
-            createElement({ type: 'div', parent: controls, classList: ['playerScore'], innerText: `${i}.` });
+            createElement({ type: 'div', parent: controls, classList: ['playerScore', 'center'], innerText: `${i}` });
         }
     }
 
