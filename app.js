@@ -172,7 +172,8 @@ class ScoreBoardHtmlRenderer {
         let total = player.scores.reduce((sum, val) => sum + val, 0);
         createElement({ type: 'div', parent: playerBox, classList: ['playerTotal'], innerText: total + '' })
         for (let score of player.scores.slice().reverse()) {
-            createElement({ type: 'div', parent: playerBox, classList: ['playerScore'], innerText: score + '' });
+            createElement({ type: 'div', parent: playerBox, classList: ['playerScore'], innerText: 'C:' + score + ' T:' +  total});
+            total -= score;
         }
     }
 
